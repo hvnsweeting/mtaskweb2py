@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.UnboundLocalError'> local variable 'tasks' referenced before assignment"
+p3
+sS'layer'
+p4
+S'/home/famihug/Apps/web2py/applications/test/controllers/default.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n# this file is released under public domain and you can use without limitations\n\n#########################################################################\n## This is a samples controller\n## - index is the default action of any application\n## - user is required for authentication and authorization\n## - download is for downloading files uploaded in the db (does streaming)\n## - call exposes all registered services (none by default)\n#########################################################################\n\ndef index():\n\t"""\n\texample action using the internationalization operator T and flash\n\trendered by views/default/index.html or views/generic.html\n\t"""\n\tresponse.flash = "Welcome to web2py!"\n\ttasks = db(db.tasks).select(orderby=tasks.enddate)\n\treturn dict(tasks=tasks)\n\ndef create():\n\tresponse.flash = "Create new task"\n\tform = SQLFORM(db.tasks)\n\tif form.process().accepted:\n\t\tresponse.flash = "Form accepted"\n\telif form.errors:\n\t\tresponse.flash = "Form has errs"\n\telse:\n\t\tresponse.flash = "Plz fill the form"\n\treturn dict(form=form)\n\ndef user():\n\t"""\n\texposes:\n\thttp://..../[app]/default/user/login\n\thttp://..../[app]/default/user/logout\n\thttp://..../[app]/default/user/register\n\thttp://..../[app]/default/user/profile\n\thttp://..../[app]/default/user/retrieve_password\n\thttp://..../[app]/default/user/change_password\n\tuse @auth.requires_login()\n\t\t@auth.requires_membership(\'group name\')\n\t\t@auth.requires_permission(\'read\',\'table name\',record_id)\n\tto decorate functions that need access control\n\t"""\n\treturn dict(form=auth())\n\n\ndef download():\n\t"""\n\tallows downloading of uploaded files\n\thttp://..../[app]/default/download/[filename]\n\t"""\n\treturn response.download(request,db)\n\n\ndef call():\n\t"""\n\texposes services. for example:\n\thttp://..../[app]/default/call/jsonrpc\n\tdecorate with @services.jsonrpc the functions to expose\n\tsupports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv\n\t"""\n\treturn service()\n\n\n#@auth.requires_signature()\ndef data():\n\t"""\n\thttp://..../[app]/default/data/tables\n\thttp://..../[app]/default/data/create/[table]\n\thttp://..../[app]/default/data/read/[table]/[id]\n\thttp://..../[app]/default/data/update/[table]/[id]\n\thttp://..../[app]/default/data/delete/[table]/[id]\n\thttp://..../[app]/default/data/select/[table]\n\thttp://..../[app]/default/data/search/[table]\n\tbut URLs must be signed, i.e. linked with\n\t  A(\'table\',_href=URL(\'data/tables\',user_signature=True))\n\tor with the signed load operator\n\t  LOAD(\'default\',\'data.load\',args=\'tables\',ajax=True,user_signature=True)\n\t"""\n\treturn dict(form=crud())\n\nresponse._vars=response._caller(index)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/famihug/Apps/web2py/gluon/restricted.py", line 205, in restricted\n    exec ccode in environment\n  File "/home/famihug/Apps/web2py/applications/test/controllers/default.py", line 84, in <module>\n  File "/home/famihug/Apps/web2py/gluon/globals.py", line 173, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/famihug/Apps/web2py/applications/test/controllers/default.py", line 18, in index\n    tasks = db(db.tasks).select(orderby=tasks.enddate)\nUnboundLocalError: local variable \'tasks\' referenced before assignment\n'
+p11
+s.
